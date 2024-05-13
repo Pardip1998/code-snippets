@@ -8,17 +8,18 @@
 <body>
 	<style>
 		*{padding: 0;margin: 0;box-sizing: border-box;}
-		/*body{width:100%;height: 100vh;display: flex;justify-content: center;align-items: center;}*/
+		body{width:100%;height: 100vh;display: flex;justify-content: center;gap:30px;padding: 40px 0;}
 
 		.ym-select button{display: inline-block;background: transparent;color:#fff;border:none;}
 
 		.ym-select-wrapper{max-width: 400px;width:100%;}
-		.ym-select-list{max-height: 0px;transition: 0.5s all linear;overflow: hidden;}
+		.ym-select-list{max-height: 0px;transition: 0.5s all linear;overflow: hidden;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;}
 		.ym-select-wrapper.show .ym-select-list{max-height: calc(100vh - 200px);overflow: auto;}
 		.ym-select{background: #4dabe9;color:#fff;border-radius: 10px;font-size: 20px;}
 		.ym-selected-value{font-size: 20px;position: relative;display: block;width: 100%;text-align: left;padding: 12px;}
 		.ym-selected-value::after{content:'';position: absolute;top:50%;right:12px;transform: translateY(-50%);width:22px;height: 22px;
-		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="%23fff" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>') no-repeat center center;}
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="%23fff" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>') no-repeat center center;transition: 0.3s all linear;}
+		.ym-select-wrapper.show .ym-selected-value::after{transform:rotate(-180deg);top:14px;}
 		.ym-selected-option-group-heading{display: block;padding: 12px;border-top: 1px solid #fff;}
 		.ym-selected-option-group-list li{padding: 12px 16px;border-top: 1px solid #fff;}
 		.ym-selected-option-group-list li:hover{background: #94c947;}
@@ -26,6 +27,33 @@
 		
 	</style>
 	
+	<div class="ym-select-wrapper">
+		<div class="ym-select">
+			<input type="text" hidden="true" class="ym-selected-input">
+			<button class="ym-selected-value ym-select-toggle-btn">Choose Any One</button>
+			<ul class="ym-select-list">
+				<li class="ym-selected-option-group">
+					<span class="ym-selected-option-group-heading">Mobiles</span>
+					<ul class="ym-selected-option-group-list">
+						<li value="r1">Redmi</li>
+						<li value="r2">Realme</li>
+						<li value="v1">Vivo</li>
+						<li value="o1">Oppo</li>
+					</ul>
+				</li>
+				<li class="ym-selected-option-group">
+					<span class="ym-selected-option-group-heading">Colors</span>
+					<ul class="ym-selected-option-group-list">
+						<li value="r3">Red</li>
+						<li value="g1">Green</li>
+						<li value="b1">Blue</li>
+						<li value="p1">Pink</li>
+					</ul>
+				</li>
+
+			</ul>
+		</div>
+	</div>
 	<div class="ym-select-wrapper">
 		<div class="ym-select">
 			<input type="text" hidden="true" class="ym-selected-input">
@@ -61,7 +89,14 @@
 			const btns = document.querySelectorAll('.ym-select-toggle-btn');
 			btns.forEach((btnEl)=>{
 				btnEl.addEventListener('click', (e)=>{
-					e.target.closest('.ym-select-wrapper').classList.toggle('show');
+					const wrapperEl = e.target.closest('.ym-select-wrapper');
+					wrapperEl.classList.toggle('show');
+
+					const wEls = document.querySelectorAll('.ym-select-wrapper');
+					wEls.forEach((wEl)=>{
+						if(wrapperEl === wEl) return false;
+						wEl.classList.remove('show');
+					})
 				})
 			})
 
@@ -81,6 +116,19 @@
 					}
 
 				})
+			})
+
+			// outside click of box - close box
+			document.addEventListener('click', (e)=>{
+				const t = e.target.closest('.ym-select-wrapper');
+				if(t) {
+					return false;
+				} else{
+					document.querySelectorAll('.ym-select-wrapper.show .ym-select-toggle-btn').forEach((btnEl)=>{
+						btnEl.click();
+					})
+				}
+				
 			})
 		}
 
