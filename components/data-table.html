@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<style>
+		.ym-dtable{background: #212529;max-width: 734px;margin:0 auto;color:#dae0e7;padding: 27px 22px;border-radius: 7px;font-size: 15px;line-height: calc(1005 + 7px);display: flex;align-items: center;flex-wrap: wrap;}
+
+		.ym-dtable-entries-per-page{margin-right: auto;}
+		.ym-dtable-entries-per-page-select{background: #212529;border:1px solid #4d5154;color: inherit;margin-right: 4px;padding: 6px 5px;border-radius: 3px;color: #dae0e7;}
+		.ym-dtable-entries-per-page-select option{background: #212529;color: #dae0e7;border: 1px solid rgba(255,255,255,.2);}
+
+		.ym-dtable-live-search-input{border: 1px solid rgba(255,255,255,.2);background: inherit;height: 32px;padding: 5px;border-radius: 3px;}
+
+		.ym-dtable-table{width:100%;margin-top: 20px;}
+		.ym-dtable-table table{border-collapse: collapse;width:100%;}
+		.ym-dtable-table tr:nth-child(even){background: rgba(53, 53, 53,0.3);}
+		.ym-dtable-table tbody tr:hover{background: #353535;}
+		.ym-dtable-table :where(table,td,th){border:1px solid rgba(255,255,255,.05);}
+		.ym-dtable-table :where(th,td){padding: 10px;text-align: left;}
+		.ym-dtable-table th{font-weight: 700;font-size: 16px;border-bottom:2px solid rgba(255,255,255,.07)}
+
+		.ym-dtable-showing-entries{margin-top: 20px;margin-right: auto;}
+
+		.ym-dtable-pagination{margin-top: 20px;}
+		.ym-dtable-pagination button{background: inherit;color:inherit;border:none;padding: 7px 13px;border-radius: 2px;cursor: pointer;}
+		.ym-dtable-pagination button.disable{color: #666;pointer-events: none;}
+		.ym-dtable-pagination button:hover, .ym-dtable-pagination button.active{background: #353535;}
+		.ym-dtable-pagination button.active{pointer-events: none;}
+
+
+	</style>
+	<div class="ym-dtable">
+		<div class="ym-dtable-entries-per-page">
+			<select id="ym-dtable-entries-per-page-select" class="ym-dtable-entries-per-page-select">				
+				<option value="5" select>5</option>
+				<option value="10" select>10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="100">100</option>
+			</select>
+			<label for="ym-dtable-entries-per-page-select">entries per page</label>
+		</div>
+		<div class="ym-dtable-live-search">
+			<label for="ym-dtable-live-search">Search:</label>
+			<input type="search" id="ym-dtable-live-search" class="ym-dtable-live-search-input">
+		</div>
+		<div class="ym-dtable-table">
+			<table>
+				<thead>
+				   <tr>
+				   	  <th>ID</th>
+				      <th>Name</th>
+				      <th>Position</th>
+				      <th>Office</th>
+				      <th>Age</th>
+				      <th>Start date</th>	
+				      <th>Amount</th>		      
+				   </tr>
+				</thead>
+
+				<tbody>
+				   <tr>
+				   	  <td>1</td>
+				      <td>Airi Satou</td>
+				      <td>Accountant</td>
+				      <td>Tokyo</td>
+				      <td>33</td>
+				      <td>28/11/2008</td>
+				      <td>$162,700</td>
+				   </tr>
+				   <tr>
+				   	  <td>2</td>
+				      <td>Angelica Ramos</td>
+				      <td>Chief Executive Officer (CEO)</td>
+				      <td>London</td>
+				      <td>47</td>
+				      <td>9/10/2009</td>
+				      <td>$1,200,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>3</td>
+				      <td>Ashton Cox</td>
+				      <td>Junior Technical Author</td>
+				      <td>San Francisco</td>
+				      <td>66</td>
+				      <td>12/1/2009</td>
+				      <td>$86,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>4</td>
+				      <td>Bradley Greer</td>
+				      <td>Software Engineer</td>
+				      <td>London</td>
+				      <td>41</td>
+				      <td>13/10/2012</td>
+				      <td>$132,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>5</td>
+				      <td>Brenden Wagner</td>
+				      <td>Software Engineer</td>
+				      <td>San Francisco</td>
+				      <td>28</td>
+				      <td>7/6/2011</td>
+				      <td>$206,850</td>
+				   </tr>
+				   <tr>
+				   	  <td>6</td>
+				      <td>Brielle Williamson</td>
+				      <td>Integration Specialist</td>
+				      <td>New York</td>
+				      <td>61</td>
+				      <td>2/12/2012</td>
+				      <td>$372,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>7</td>
+				      <td>Bruno Nash</td>
+				      <td>Software Engineer</td>
+				      <td>London</td>
+				      <td>38</td>
+				      <td>3/5/2011</td>
+				      <td>$163,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>8</td>
+				      <td>Caesar Vance</td>
+				      <td>Pre-Sales Support</td>
+				      <td>New York</td>
+				      <td>21</td>
+				      <td>12/12/2011</td>
+				      <td>$106,450</td>
+				   </tr>
+				   <tr>
+				   	  <td>9</td>
+				      <td>Cara Stevens</td>
+				      <td>Sales Assistant</td>
+				      <td>New York</td>
+				      <td>46</td>
+				      <td>6/12/2011</td>
+				      <td>$145,600</td>
+				   </tr>
+				   <tr>
+				   	  <td>10</td>
+				      <td>Cedric Kelly</td>
+				      <td>Senior Javascript Developer</td>
+				      <td>Edinburgh</td>
+				      <td>22</td>
+				      <td>29/3/2012</td>
+				      <td>$433,060</td>
+				   </tr>
+				   <tr>
+				   	  <td>11</td>
+				      <td>Charde Marshall</td>
+				      <td>Regional Director</td>
+				      <td>San Francisco</td>
+				      <td>36</td>
+				      <td>16/10/2008</td>
+				      <td>$470,600</td>
+				   </tr>
+				   <tr>
+				   	  <td>12</td>
+				      <td>Colleen Hurst</td>
+				      <td>Javascript Developer</td>
+				      <td>San Francisco</td>
+				      <td>39</td>
+				      <td>15/9/2009</td>
+				      <td>$205,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>13</td>
+				      <td>Dai Rios</td>
+				      <td>Personnel Lead</td>
+				      <td>Edinburgh</td>
+				      <td>35</td>
+				      <td>26/9/2012</td>
+				      <td>$217,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>14</td>
+				      <td>Donna Snider</td>
+				      <td>Customer Support</td>
+				      <td>New York</td>
+				      <td>27</td>
+				      <td>25/1/2011</td>
+				      <td>$112,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>15</td>
+				      <td>Doris Wilder</td>
+				      <td>Sales Assistant</td>
+				      <td>Sydney</td>
+				      <td>23</td>
+				      <td>20/9/2010</td>
+				      <td>$85,600</td>
+				   </tr>
+				   <tr>
+				   	  <td>16</td>
+				      <td>Finn Camacho</td>
+				      <td>Support Engineer</td>
+				      <td>San Francisco</td>
+				      <td>47</td>
+				      <td>7/7/2009</td>
+				      <td>$87,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>17</td>
+				      <td>Fiona Green</td>
+				      <td>Chief Operating Officer (COO)</td>
+				      <td>San Francisco</td>
+				      <td>48</td>
+				      <td>11/3/2010</td>
+				      <td>$850,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>18</td>
+				      <td>Garrett Winters</td>
+				      <td>Accountant</td>
+				      <td>Tokyo</td>
+				      <td>63</td>
+				      <td>25/7/2011</td>
+				      <td>$170,750</td>
+				   </tr>
+				   <tr>
+				   	  <td>19</td>
+				      <td>Gavin Cortez</td>
+				      <td>Team Leader</td>
+				      <td>San Francisco</td>
+				      <td>22</td>
+				      <td>26/10/2008</td>
+				      <td>$235,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>20</td>
+				      <td>Gavin Joyce</td>
+				      <td>Developer</td>
+				      <td>Edinburgh</td>
+				      <td>42</td>
+				      <td>22/12/2010</td>
+				      <td>$92,575</td>
+				   </tr>
+				   <tr>
+				   	  <td>21</td>
+				      <td>Gloria Little</td>
+				      <td>Systems Administrator</td>
+				      <td>New York</td>
+				      <td>59</td>
+				      <td>10/4/2009</td>
+				      <td>$237,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>22</td>
+				      <td>Haley Kennedy</td>
+				      <td>Senior Marketing Designer</td>
+				      <td>London</td>
+				      <td>43</td>
+				      <td>18/12/2012</td>
+				      <td>$313,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>23</td>
+				      <td>Hermione Butler</td>
+				      <td>Regional Director</td>
+				      <td>London</td>
+				      <td>47</td>
+				      <td>21/3/2011</td>
+				      <td>$356,250</td>
+				   </tr>
+				   <tr>
+				   	  <td>24</td>
+				      <td>Herrod Chandler</td>
+				      <td>Sales Assistant</td>
+				      <td>San Francisco</td>
+				      <td>59</td>
+				      <td>6/8/2012</td>
+				      <td>$137,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>25</td>
+				      <td>Hope Fuentes</td>
+				      <td>Secretary</td>
+				      <td>San Francisco</td>
+				      <td>41</td>
+				      <td>12/2/2010</td>
+				      <td>$109,850</td>
+				   </tr>
+				   <tr>
+				   	  <td>26</td>
+				      <td>Howard Hatfield</td>
+				      <td>Office Manager</td>
+				      <td>San Francisco</td>
+				      <td>51</td>
+				      <td>16/12/2008</td>
+				      <td>$164,500</td>
+				   </tr>
+				   <tr>
+				   	  <td>27</td>
+				      <td>Jackson Bradshaw</td>
+				      <td>Director</td>
+				      <td>New York</td>
+				      <td>65</td>
+				      <td>26/9/2008</td>
+				      <td>$645,750</td>
+				   </tr>
+				   <tr>
+				   	  <td>28</td>
+				      <td>Jena Gaines</td>
+				      <td>Office Manager</td>
+				      <td>London</td>
+				      <td>30</td>
+				      <td>19/12/2008</td>
+				      <td>$90,560</td>
+				   </tr>
+				   <tr>
+				   	  <td>29</td>
+				      <td>Jenette Caldwell</td>
+				      <td>Development Lead</td>
+				      <td>New York</td>
+				      <td>30</td>
+				      <td>3/9/2011</td>
+				      <td>$345,000</td>
+				   </tr>
+				   <tr>
+				   	  <td>30</td>
+				      <td>Jennifer Acosta</td>
+				      <td>Junior Javascript Developer</td>
+				      <td>Edinburgh</td>
+				      <td>43</td>
+				      <td>1/2/2013</td>
+				      <td>$75,650</td>
+				   </tr>
+				</tbody>
+
+			</table>	
+		</div>
+		<div class="ym-dtable-showing-entries">
+			<span>Showing 1 to 10 of 57 entries</span>
+		</div>
+		<div id="ym-dtable-pagination" class="ym-dtable-pagination"></div>
+
+	</div>
+
+
+<script>
+	// const ym_dtable = {
+
+	// 	id: {}, // all elements
+
+	// 	bodyRows: [], // actual table body data
+
+	// 	// store elements
+	// 	storeElements: function(){			
+	// 		this.id.dtable = document.querySelector('.ym-dtable');
+	// 		this.id.entriesPerPageSelect = this.id.dtable .querySelector('.ym-dtable-entries-per-page-select');
+	// 		this.id.dtableTable = this.id.dtable .querySelector('.ym-dtable-table');			
+	// 		this.id.dtableTableBody = this.id.dtable .querySelector('.ym-dtable-table tbody');
+	// 		this.id.paginationBox = this.id.dtable .querySelector('.ym-dtable-pagination');
+	// 	},
+
+	// 	// store table body actual data - page load
+	// 	storeRows: function(){
+	// 		const tbodyRows = this.id.dtableTableBody.querySelectorAll('tr');	
+	// 		tbodyRows.forEach((r)=>{
+	// 			this.bodyRows.push(r.outerHTML);
+	// 		})
+	// 	},
+
+	// 	// show tbody rows as per entries per page - page load
+	// 	showEntriesTableData: function(){
+	// 		const val = +this.id.entriesPerPageSelect.value;				
+	// 		this.id.dtableTableBody.innerHTML = this.getBodyRows(val);
+	// 	},
+
+	// 	// pagination action - page load
+	// 	dtablePagination: function(){
+	// 		const totalRows = this.bodyRows.length;
+	// 		const showRowPerPage = +this.id.entriesPerPageSelect.value;
+	// 		const totalPages = Math.ceil(totalRows/showRowPerPage);
+	// 		let str = `
+	// 			<button>«</button>
+	// 			<button>‹</button>
+	// 		`;
+	// 		for(let i=1; i<=totalPages; i++){
+	// 			str += `<button>${i}</button>`;
+	// 		}
+	// 		str += `
+	// 			<button>›</button>
+	// 			<button>»</button>
+	// 		`;
+	// 		this.id.paginationBox.innerHTML = str;
+	// 	},
+
+	// 	getBodyRows: function(val){
+	// 		let str = ``;
+	// 		for(let i=0; i<val; i++){
+	// 			if(!this.bodyRows[i]) continue; // if data less than required, skip
+	// 			str += this.bodyRows[i];
+	// 		}
+	// 		return str;
+	// 	},
+
+	// 	// entries per page - Action
+	// 	entriesPerPageSelectAction: function(){
+	// 		this.id.entriesPerPageSelect.addEventListener('change',(e)=>{
+	// 			const val = +this.id.entriesPerPageSelect.value;				
+	// 			this.id.dtableTableBody.innerHTML = this.getBodyRows(val);
+	// 			this.dtablePagination();
+	// 		})
+	// 	},
+
+	// 	init: function(){
+	// 		this.storeElements();
+	// 		this.storeRows();
+	// 		this.showEntriesTableData();
+	// 		this.dtablePagination();
+
+	// 		this.entriesPerPageSelectAction();
+	// 		console.log(this);
+	// 	},
+	// }
+	// ym_dtable.init();
+
+	//Start Here Pagination ...
+	/*
+		data fetch by button number, if number 3, totalRows/entriesPerPage
+		data = 100
+		entries = 25
+		button = 3
+		show = {
+			
+		}
+	*/
+
+
+	class YM_Data_Table {
+		#id = {}; // all elements
+ 
+		#bodyRows = []; // actual table body data
+
+		// store elements
+		#storeElements(){			
+			this.#id.dtable = document.querySelector('.ym-dtable');
+			this.#id.entriesPerPageSelect = this.#id.dtable .querySelector('.ym-dtable-entries-per-page-select');
+			this.#id.dtableTable = this.#id.dtable .querySelector('.ym-dtable-table');			
+			this.#id.dtableTableBody = this.#id.dtable .querySelector('.ym-dtable-table tbody');
+			this.#id.paginationBox = this.#id.dtable .querySelector('.ym-dtable-pagination');
+			this.#id.firstBtn = this.#id.dtable .querySelector('.ym-dtable-first-pagi-btn');
+			this.#id.prevBtn = this.#id.dtable .querySelector('.ym-dtable-prev-pagi-btn');
+			this.#id.nextBtn = this.#id.dtable .querySelector('.ym-dtable-next-pagi-btn');
+			this.#id.lastBtn = this.#id.dtable .querySelector('.ym-dtable-last-pagi-btn');
+		}
+
+		// store table body actual data - page load
+		#storeRows(){
+			const tbodyRows = this.#id.dtableTableBody.querySelectorAll('tr');	
+			tbodyRows.forEach((r,i)=>{
+				r.setAttribute('data-row-id',i+1)
+				this.#bodyRows.push(r.outerHTML);
+			})
+		}
+
+		// show tbody rows as per entries per page - page load
+		#showEntriesTableData(){
+			const val = +this.#id.entriesPerPageSelect.value;				
+			this.#id.dtableTableBody.innerHTML = this.#getBodyRows(val);
+		}
+
+		// pagination action - page load
+		#dtablePagination(){
+			const totalRows = this.#bodyRows.length;
+			const showRowPerPage = +this.#id.entriesPerPageSelect.value;
+			const totalPages = Math.ceil(totalRows/showRowPerPage);
+			let str = `
+				<button class="ym-dtable-pagi-btn disable" id="ym-dtable-first-pagi-btn" data-ym-page-number="1">«</button>
+				<button class="ym-dtable-pagi-btn disable" id="ym-dtable-prev-pagi-btn" data-ym-page-number="0">‹</button>
+			`;
+			for(let i=1; i<=totalPages; i++){
+				str += `<button class="ym-dtable-pagi-btn ym-dtable-pagi-number-btn ${i===1 ? 'active ym-dtable-first-pagi-number-btn' : ''} ${i===totalPages ? 'ym-dtable-last-pagi-number-btn' : ''}" data-ym-page-number="${i}">${i}</button>`;
+			}
+			str += `
+				<button class="ym-dtable-pagi-btn" id="ym-dtable-next-pagi-btn" data-ym-page-number="2">›</button>
+				<button class="ym-dtable-pagi-btn" id="ym-dtable-last-pagi-btn" data-ym-page-number="${totalPages}">»</button>
+			`;
+			this.#id.paginationBox.innerHTML = str;
+		}
+
+		#getBodyRows(val){
+			let str = ``;
+			for(let i=0; i<val; i++){
+				if(!this.#bodyRows[i]) continue; // if data less than required, skip
+				str += this.#bodyRows[i];
+			}
+			return str;
+		}
+
+		// entries per page - Action
+		#entriesPerPageSelectAction(){
+			this.#id.entriesPerPageSelect.addEventListener('change',(e)=>{
+				const val = +this.#id.entriesPerPageSelect.value;				
+				this.#id.dtableTableBody.innerHTML = this.#getBodyRows(val);
+				this.#dtablePagination();
+			})
+		}
+
+		// get table rows based on page number as tring
+		#getTableRowsAccordingToPageNumber(pageNumber){
+			const entries = +this.#id.entriesPerPageSelect.value;
+			const start_index = ((pageNumber-1)*entries);
+			const fetchedRows = this.#bodyRows.slice(start_index, start_index+entries);
+			return fetchedRows.join('');
+		}
+
+		// click action on pagination button
+		#actionPaginationButton(){
+			this.#id.paginationBox.addEventListener('click', (e)=>{
+
+				let tBtn = e.target.closest('.ym-dtable-pagi-btn');
+				const firstBtn = this.#id.paginationBox.querySelector('#ym-dtable-first-pagi-btn');
+				const lastBtn = this.#id.paginationBox.querySelector('#ym-dtable-last-pagi-btn');
+				const prevBtn = this.#id.paginationBox.querySelector('#ym-dtable-prev-pagi-btn');
+				const nextBtn = this.#id.paginationBox.querySelector('#ym-dtable-next-pagi-btn');
+				const numbBtns = this.#id.paginationBox.querySelectorAll('.ym-dtable-pagi-number-btn');
+				const firstPagiNumbBtn = this.#id.paginationBox.querySelector('.ym-dtable-first-pagi-number-btn');
+				const lastPagiNumbBtn = this.#id.paginationBox.querySelector('.ym-dtable-last-pagi-number-btn');
+				const activeBtn = this.#id.paginationBox.querySelector('.ym-dtable-pagi-btn.active');
+
+				if(!tBtn) return false;				
+
+				// click on first, last, next, prev btn
+				if(tBtn === firstBtn) {								
+					tBtn = numbBtns[0];
+				} else if (tBtn === lastBtn) {						
+					tBtn = numbBtns[numbBtns.length-1];			
+				} else if(tBtn === prevBtn) {
+					tBtn = activeBtn.previousElementSibling;	
+				} else if(tBtn === nextBtn) {
+					tBtn = activeBtn.nextElementSibling;	
+				}
+
+				// control active class				
+				numbBtns.forEach((btn)=>{
+					if(tBtn === btn) {
+						tBtn.classList.add('active');						
+					} else {
+						btn.classList.remove('active');
+					}
+				})
+
+				prevBtn.setAttribute('data-ym-page-number',+tBtn.dataset.ymPageNumber-1);
+				nextBtn.setAttribute('data-ym-page-number',+tBtn.dataset.ymPageNumber+1);				
+
+				// enable - disable = first, last, next, prev btn
+				console.log(tBtn , firstPagiNumbBtn);
+				console.log(tBtn === firstPagiNumbBtn);
+				if(tBtn === firstPagiNumbBtn){
+
+					firstBtn.classList.add('disable');
+					prevBtn.classList.add('disable');
+				} else {
+					firstBtn.classList.remove('disable');
+					prevBtn.classList.remove('disable');
+				}
+				if(tBtn == lastPagiNumbBtn){
+					lastBtn.classList.add('disable');
+					nextBtn.classList.add('disable');
+				} else {
+					lastBtn.classList.remove('disable');
+					nextBtn.classList.remove('disable');
+				}
+
+				// structure add
+				const rows = this.#getTableRowsAccordingToPageNumber(tBtn.dataset.ymPageNumber);
+				this.#id.dtableTableBody.innerHTML = rows;
+
+			})
+		}
+
+		static init(){
+			const YM_Data_Table_Class = new YM_Data_Table();
+			console.log(YM_Data_Table_Class.#id);
+			YM_Data_Table_Class.#storeElements();
+			YM_Data_Table_Class.#storeRows();
+			YM_Data_Table_Class.#showEntriesTableData();
+			YM_Data_Table_Class.#dtablePagination();
+			YM_Data_Table_Class.#entriesPerPageSelectAction();	
+			YM_Data_Table_Class.#actionPaginationButton();			
+		}
+	}
+
+	YM_Data_Table.init();
+
+	
+</script>	
+</body>
+</html>
