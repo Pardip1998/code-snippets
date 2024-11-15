@@ -1,0 +1,8 @@
+// menu
+function chck_theme_support(){
+
+	register_nav_menu('chck_header_main_menu', 'Header Main Menu');
+	register_nav_menu('chck_footer_quick_menu', 'Footer Quick Menu');
+	
+}
+add_action('after_setup_theme', 'chck_theme_support');

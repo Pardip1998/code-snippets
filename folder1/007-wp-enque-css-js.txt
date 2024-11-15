@@ -1,0 +1,18 @@
+// Enque CSS & JS
+function chck_enque_css_js(){
+
+	wp_enqueue_style('chck-font', get_theme_file_uri('assets/css/fonts.css'));
+	wp_enqueue_style('chck-bootstrap-css', get_theme_file_uri('assets/css/bootstrap.min.css'));
+	wp_enqueue_style('chck-owl-carousel-css', get_theme_file_uri('assets/css/owl.carousel.min.css'));
+	wp_enqueue_style('chck-owl-theme-css', get_theme_file_uri('assets/css/owl.theme.default.min.css'));
+	wp_enqueue_style('chck-custom-scroll-css', get_theme_file_uri('assets/css/custom-scroll.css'));
+	wp_enqueue_style('chck-main-css', get_stylesheet_uri(),NULL,filemtime( get_template_directory() . '/style.css' ));
+
+	wp_enqueue_script('chck-jquery', get_theme_file_uri('assets/js/jquery.min.js'));
+	wp_enqueue_script('chck-owl-script', get_theme_file_uri('assets/js/owl.carousel.js'));
+	wp_enqueue_script('chck-custom-scroll-js', get_theme_file_uri('assets/js/custom-scroll.js'));
+	wp_enqueue_script('chck-bootstrap-js', get_theme_file_uri('assets/js/bootstrap.bundle.min.js'));
+	wp_enqueue_script('chck-main-script', get_theme_file_uri('assets/js/script.js'), NULL, microtime());
+	
+}
+add_action('wp_enqueue_scripts', 'chck_enque_css_js');

@@ -1,0 +1,12 @@
+// Default content for page when new post
+function set_default_block_editor_content_for_services( $content, $post ) {
+    // Check if the post type is 'services' and it's a new post
+    if ( in_array( $post->post_type, ['health-treatments', 'conditions'] ) && 'auto-draft' === $post->post_status ) {
+        $content = '
+			
+		';
+    }
+    return $content;
+}
+add_filter( 'default_content', 'set_default_block_editor_content_for_services', 10, 2 );
+

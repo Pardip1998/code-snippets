@@ -1,0 +1,5 @@
+// Global FAQ
+function get_faq_func($args) {
+    return $str;
+}
+add_shortcode('get_faq', 'get_faq_func');

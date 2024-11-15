@@ -1,0 +1,14 @@
+
+// Default content for page when new add
+function set_default_block_editor_content_for_pages( $content, $post ) {
+    // Check if the post type is 'page' and it's a new page
+    if ( 'page' === $post->post_type && 'auto-draft' === $post->post_status ) {
+        $content = '
+			
+
+		';
+    }
+    return $content;
+}
+add_filter( 'default_content', 'set_default_block_editor_content_for_pages', 10, 2 );
+

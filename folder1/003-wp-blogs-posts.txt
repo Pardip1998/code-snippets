@@ -1,0 +1,41 @@
+// Latest Blog
+function get_latest_blogs_func() {
+	
+	$blogs = new WP_Query(array(		
+		'posts_per_page' => 10
+	));
+	
+	if ($blogs->have_posts()) {
+		
+		$str = '<div class="blogs_row owl-carousel">';
+		while ($blogs->have_posts()) {			
+			$blogs->the_post();
+			$title = get_the_title();
+			$excerpt = get_the_excerpt();
+			$img = get_the_post_thumbnail_url();
+			$permalink = get_the_permalink();
+			$str .= '
+				<div class="item">
+					<div class="blog_item">
+						<figure class="blog-pic">
+							<img src="'.$img.'" alt="">
+						</figure>
+						<div class="blog_content">
+							<h4 class="blog_title">'.$title.'</h4>
+							<p class="blog_excerpt">'.$excerpt.'</p>
+							<a class="read-more" href="'.$permalink.'">Read More</a>
+						</div>
+						<a href="'.$permalink.'" class="whole_link"></a>
+					</div>
+				</div>
+			';
+		}
+		$str .= '</div>';
+			/* Restore original Post Data */
+			wp_reset_postdata();
+	} else {
+		// no posts found
+	}
+    return $str;
+}
+add_shortcode('get_latest_blogs', 'get_latest_blogs_func');

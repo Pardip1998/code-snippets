@@ -1,0 +1,14 @@
+
+// Default Contents for wordpress default post
+function set_default_block_editor_content_for_posts( $content, $post ) {
+    // Check if the post type is 'post' and if it's a new post
+    if ( 'post' === $post->post_type && 'auto-draft' === $post->post_status ) {
+        $content = '
+			
+		';
+    }
+    
+    return $content;
+}
+add_filter( 'default_content', 'set_default_block_editor_content_for_posts', 10, 2 );
+
