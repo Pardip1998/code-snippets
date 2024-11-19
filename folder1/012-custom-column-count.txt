@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<style>
+		.box{display: flex;}
+	</style>
+	<div class="box" data-column-items="3">
+		<ul>
+			<li>List Item 1</li>
+			<li>List Item 2</li>
+			<li>List Item 3</li>
+			<li>List Item 4</li>
+			<li>List Item 5</li>
+			<li>List Item 6</li>
+			<li>List Item 7</li>
+			<li>List Item 8</li>
+			<li>List Item 9</li>
+			<li>List Item 10</li>
+			<li>List Item 11</li>
+			<li>List Item 12</li>
+			<li>List Item 13</li>
+			<li>List Item 14</li>
+			<li>List Item 15</li>
+			<li>List Item 16</li>
+			<li>List Item 17</li>
+		</ul>
+	</div>	
+	<script>
+		function itemsDistributed(){
+			const mainEl = document.querySelector('[data-column-items]');
+			const columnItems = +(mainEl.dataset.columnItems);
+			const totalLi = mainEl.querySelectorAll('[data-column-items] li');
+			const loopNumb = Math.ceil(totalLi.length/columnItems);
+			
+			let start = 1
+			let end = columnItems;
+
+			const strs = {};
+			for(let i=1; i<=loopNumb; i++){
+				strs['str'+i] = '<ul>';
+				const liEls = mainEl.querySelectorAll(`li:nth-child(n+${start}):nth-child(-n+${end})`);	
+				liEls.forEach((liEl)=>{
+					strs['str'+i] += liEl.outerHTML;
+				})
+				strs['str'+i] += '</ul>';
+
+
+				start = end + 1;
+				end = end + columnItems;	
+			}	
+
+			mainEl.innerHTML = '';
+			for(let str in strs){
+				mainEl.insertAdjacentHTML('beforeend',strs[str]);
+			}
+		}
+		itemsDistributed();
+	</script>
+</body>
+</html>	
