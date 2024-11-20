@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body style="height:100vh;width:100vw;display: flex;justify-content: center;align-items: center;">
+	<style>
+		.mask-icon {display: inline-flex;color: red;border:1px solid currentColor;border-radius: 50%;width: 100px;height: 100px;}
+		.mask-icon::before{content:'';mask-repeat: no-repeat;mask-size: 40px auto;mask-position: center center;display: inline-flex;mask-image: url(f.svg);background: currentColor;width: 100%;height: 100%;}
+	</style>
+	<i class="mask-icon facebook-icon"></i>
+</body>
+</html>
