@@ -2,15 +2,16 @@
 
 // no review in one row, remove star box
 const rows_column_indicator = (target) => {
-    const parentEl = document.querySelector(target);
-    const articles = parentEl.querySelectorAll('article');
+    const parentEl = document.querySelector('#features-row');
+		if(!parentEl) return false;
+    const articles = parentEl.querySelectorAll('.features-colm');
 
     let trackRow = articles[0].getBoundingClientRect().top;
     let rowNum = 1;
     articles.forEach((aEl, i)=>{
      
         if(i === 0) {
-            articles[0].classList.add(`article-row-${rowNum}`);
+            articles[0].setAttribute(`featurescolm-row`,`${rowNum}`);
             return false;
         }
 
@@ -21,24 +22,27 @@ const rows_column_indicator = (target) => {
 
         const aElTop = aEl.getBoundingClientRect().top;
         if(aElTop === trackRow){
-            aEl.classList.add(`article-row-${rowNum}`);
+            aEl.setAttribute(`featurescolm-row`,`${rowNum}`);
         } 
         
     })
 
-    for(let i=1; i<10; i++){
-        const rows = document.querySelectorAll(`.article-row-${i}`);
-        const ratingBox = document.querySelectorAll(`.article-row-${i} [data-rating-numb="0"]`);
+		for(let i=1; i<=rowNum; i++){
+				const columnTitles = document.querySelectorAll(`[featurescolm-row="${i}"] h5`);	
 
-        if(!rows.length) return false;
-
-        if(rows.length === ratingBox.length) {
-            rows.forEach((rEl)=>{
-                rEl.classList.add('hide-rating-box');
-            })
-        }
-
-    }
+				columnTitles.forEach((el)=>{
+					el.style.height = 'auto';
+				})
+		
+				
+				let titleMaxHeight = 0;		
+				columnTitles.forEach((el)=>{
+					if(el.offsetHeight > titleMaxHeight) titleMaxHeight = el.offsetHeight;					
+				})
+				columnTitles.forEach((el)=>{
+					el.style.height = titleMaxHeight+'px';
+				})
+		}
      
     
 }
