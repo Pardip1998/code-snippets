@@ -1,0 +1,192 @@
+<?php
+
+
+// Start class
+class WTHEME {
+
+	public $homeURL;
+	public $assetsURL;
+	public $libraryURL;
+	public $wpversion;
+
+
+	public function __construct() {
+			$this->homeURL = home_url();
+			$this->assetsURL = get_stylesheet_directory_uri() . '/assets';
+			$this->libraryURL = get_stylesheet_directory_uri() . '/library';
+			$this->themeversion = wp_get_theme()->get('Version')/*.microtime()*/;
+	}
+
+	// enqueue CSS and JS
+	public function enqueCSSJS() {
+			// CSS Library
+			wp_enqueue_style('wtheme-bootstrap-css', $this->libraryURL.'/bootstrap-5.3.3/css/bootstrap.min.css', array(), '1.0', 'all');
+			wp_enqueue_style('wtheme-custom-scroll-css', $this->libraryURL.'/custom-scroll/css/custom-scroll.css', array(), '1.0', 'all');
+			wp_enqueue_style('wtheme-owl-main-css', $this->libraryURL.'/OwlCarousel-2-2.3.4/css/owl.carousel.min.css', array(), '1.0', 'all');
+			wp_enqueue_style('wtheme-owl-theme-css', $this->libraryURL.'/OwlCarousel-2-2.3.4/css/owl.theme.default.min.css', array(), '1.0', 'all');
+
+			// CSS Assets
+			wp_enqueue_style('wtheme-font-css', $this->assetsURL.'/css/font.css', array(), $this->themeversion, 'all');
+			wp_enqueue_style('wtheme-style-css', get_stylesheet_uri(), array(), $this->themeversion, 'all');
+
+			// JS Library
+			wp_enqueue_script( 'wtheme-jquery-script', $this->libraryURL.'/jquery-3.7.1/js/jquery.min.js', array(), '1.0', true );
+			wp_enqueue_script( 'wtheme-bootstrap-script', $this->libraryURL.'/bootstrap-5.3.3/js/bootstrap.bundle.min.js', array(), '1.0', true );
+			wp_enqueue_script( 'wtheme-custom-scroll-script', $this->libraryURL.'/custom-scroll/js/custom-scroll.js', array(), '1.0', true );			
+			wp_enqueue_script( 'wtheme-owl-script', $this->libraryURL.'/OwlCarousel-2-2.3.4/js/owl.carousel.js', array(), '1.0', true );
+			
+			// JS Assets
+			wp_enqueue_script( 'wtheme-main-script', $this->assetsURL.'/js/script.js', array(), $this->themeversion, true );
+	}
+
+	// register menu
+	public function registerMenus(){
+		register_nav_menus(
+				array(
+						'wtheme_header_menu' => 'Header Menu',
+						'wtheme_footer_menu' => 'Footer Menu'
+				)
+		);
+	}
+
+	// theme support
+	public function themeSupport() {
+			add_theme_support( 'custom-logo' );
+	}
+
+	// create fields - email, phone, address, social links
+	public function contactInformationThemeCustomizer($wp_customize) {
+		// Add a section for contact and social information
+		$wp_customize->add_section('my_custom_section', array(
+				'title'       => __('Contact & Social Links', 'wtheme'),
+				'description' => __('Add contact details and social media links for your site.', 'wtheme'),
+				'priority'    => 30,
+		));
+	
+		// Phone Number
+		$wp_customize->add_setting('my_custom_phone', array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field', // Sanitize phone number
+				'transport'         => 'refresh', // Refresh live preview when changed
+		));
+	
+		$wp_customize->add_control('my_custom_phone', array(
+				'label'    => __('Phone Number', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'text', // Input type for phone number
+		));
+	
+		// Email Address
+		$wp_customize->add_setting('my_custom_email', array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_email', // Sanitize email input
+				'transport'         => 'refresh',
+		));
+	
+		$wp_customize->add_control('my_custom_email', array(
+				'label'    => __('Email Id', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'email', // Input type for email
+		));
+	
+		// Address
+		$wp_customize->add_setting('my_custom_address', array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_textarea_field', // Sanitize textarea input
+				'transport'         => 'refresh',
+		));
+	
+		$wp_customize->add_control('my_custom_address', array(
+				'label'    => __('Address', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'textarea', // Input type for textarea
+		));
+	
+		// Facebook Link
+		$wp_customize->add_setting('my_custom_facebook', array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw', // Sanitize URL input
+				'transport'         => 'refresh',
+		));
+	
+		$wp_customize->add_control('my_custom_facebook', array(
+				'label'    => __('Facebook Link', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'url', // Input type for URL
+		));
+	
+		// Twitter Link
+		$wp_customize->add_setting('my_custom_twitter', array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+				'transport'         => 'refresh',
+		));
+	
+		$wp_customize->add_control('my_custom_twitter', array(
+				'label'    => __('Twitter Link', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'url',
+		));
+	
+		// LinkedIn Link
+		$wp_customize->add_setting('my_custom_linkedin', array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+				'transport'         => 'refresh',
+		));
+	
+		$wp_customize->add_control('my_custom_linkedin', array(
+				'label'    => __('LinkedIn Link', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'url',
+		));
+	
+		// Instagram Link
+		$wp_customize->add_setting('my_custom_instagram', array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+				'transport'         => 'refresh',
+		));
+	
+		$wp_customize->add_control('my_custom_instagram', array(
+				'label'    => __('Instagram Link', 'wtheme'),
+				'section'  => 'my_custom_section',
+				'type'     => 'url',
+		));
+	}
+}
+$wtheme_instance = new WTHEME();
+// End class
+
+
+
+
+// Hook the static method to 'wp_enqueue_scripts'
+add_action('wp_enqueue_scripts', [$wtheme_instance, 'enqueCSSJS']);
+
+// Register Menu
+$wtheme_instance->registerMenus();
+
+// Theme support
+add_action( 'after_setup_theme', [$wtheme_instance, 'themeSupport'] );
+
+// theme customizer - contact information
+add_action('customize_register', [$wtheme_instance, 'contactInformationThemeCustomizer'] );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
