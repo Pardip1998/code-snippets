@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <style>
+  *{padding: 0;margin: 0;box-sizing: border-box;}
+  body{display: flex;justify-content: center;align-items: center;width:100vw;height: 100vh;}
+
+  .icons-section{width:90vw;height: 90vh;border:1px solid #ccc;display: flex;flex-direction: column;}
+
+  .icons-header{display: flex;flex-wrap: wrap;justify-content: space-between;align-items: center;padding:20px 38px 20px 15px;border-bottom:2px solid #ccc;}
+  .icons-search{height: 34px;padding: 0 8px;width: 100%;max-width: 300px;}
+
+  .icons-lists{width:100%;flex-grow: 1;display: flex;flex-wrap: wrap;justify-content: flex-start;align-items: center;gap:10px;align-content: flex-start;overflow: auto;padding: 15px;}
+  .icons-lists .icons-list{width:calc(8% - 5px);height: 100px;border:1px solid #ccc;padding:8px;display: flex;justify-content: center;align-items: center;}
+  .icons-list svg{max-width: 100%;width:30px;max-height: 30px;fill: #fff;}
+
+ </style>
+ 
+ <div class="icons-section">
+  <header class="icons-header">
+    <h2>FontAwesome</h2>
+    <input class="icons-search" type="search" id="search-fontawesome-icon" placeholder="Search...">
+  </header>
+  <div class="icons-lists" id="icons-lists"></div>
+ </div>
+ <script src="script.js"></script>
+
+</body>
+</html>
